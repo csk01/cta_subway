@@ -5,10 +5,9 @@ account: csk01
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 5640999
-bundleId: 5573097
+bundleId: 5575524
 url: https://csk01.shinyapps.io/subway/
-when: 1644703346.57882
-lastSyncTime: 1644703346.57882
+when: 1644797793.25706
+lastSyncTime: 1644797793.25706
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: cta_data.tsv

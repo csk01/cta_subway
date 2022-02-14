@@ -77,7 +77,7 @@ ui <- dashboardPage(
                     selectInput(inputId = "timeframe1", label = NULL, c("Date" = "date","Month" = "month","Day" = 'day' ), selectize = FALSE),
                     plotOutput("plot2")
                   ),
-                  box(
+                  box( 
                     title = "Table", solidHeader = TRUE, status = "primary",
                     width = 12,
                     dataTableOutput("tab1")
@@ -123,16 +123,20 @@ ui <- dashboardPage(
               fluidPage(
                 box( width ='12', 
                      status = "primary",
-                  plotOutput("intersting")
-                )
-              ),
-              fluidPage(
+                     h1(textOutput("interesting_text")),
+                     plotOutput("interesting_plot1"),
+                     #plotOutput("interesting_plot2")
+            
+                ),
                 box(
                   title = "Choose menu option to see some interesting dates in the data!",
                   width = 5,
                   solidHeader = TRUE, status = "primary",
-                selectInput(inputId = "menu", label = NULL, c("1" = 1 ), selectize = FALSE),
+                  selectInput(inputId = "menu", label = "", c("Date-1" = '1', "Date-2" = '2', "Date-3" = '3', "Date-4" = '4',"Date-5" = '5', "Date-6" = '6', "Date-7" = '7', "Date-8" = '8', "Date-9" = '9', "Date-10" = '10'  ),selected = 1, selectize = FALSE),
                 )
+              ),
+              fluidPage(
+                
               )
       )
 )
@@ -140,6 +144,9 @@ ui <- dashboardPage(
   
 # Define server logic required to draw a histogram
 server <- function(input, output) {
+  
+  # increase the default font size
+  theme_set(theme_grey(base_size = 14)) 
   
   #To get the value of year
   year1Reactive <- reactive({ subset(station1Reactive(), year(station1Reactive()$date) == input$year1 )})
@@ -176,11 +183,45 @@ server <- function(input, output) {
     menu <- input$menu
     return(menu)
   })
+#output$interesting_plot2 <- renderPlot({
+#  menu <- menuReactive()
+#  if(menu =='4'){
+#    ggplot(addison_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "Train Service Halted Downtown Amid Protests In Wake Of George Floyd Death", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2020-06-01", "%Y-%m-%d"),as.Date("2020-07-1", "%Y-%m-%d")),ylim = c(0,8000)) 
+#  }
+#})  
   
-  output$interesting <- renderPlot({
+  
+  output$interesting_plot1 <- renderPlot({
     menu <- menuReactive()
-    if(menu == 1){
-      ggplot(uic_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "Rider data over the years UIC Halstead", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2020-01-01", "%Y-%m-%d"),as.Date("2020-06-01", "%Y-%m-%d"))) 
+    if(menu == '1'){
+      ggplot(uic_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "Sharp decline in number of riders at UIC-Halstead stop after WHO declares Covid-19 a pandemic in March 2020", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2020-01-01", "%Y-%m-%d"),as.Date("2021-01-01", "%Y-%m-%d")),ylim = c(0,8000)) 
+    }
+    else if(menu == '2'){
+      ggplot(ohare_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "Two Sharp spikes in ridership at OHare during the Cubs vs Cardinals Baseball game on Sep 4th and Sep 6th 2020", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2020-07-01", "%Y-%m-%d"),as.Date("2020-09-30", "%Y-%m-%d")),ylim = c(0,3700)) 
+    }
+    else if(menu == '3'){
+      ggplot(ohare_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "9/11", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2001-09-01", "%Y-%m-%d"),as.Date("2001-10-31", "%Y-%m-%d")),ylim = c(0,12000)) 
+    }
+    else if(menu =='4'){
+      ggplot(uic_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "Train Service Halted Downtown Amid Protests In Wake Of George Floyd Death", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2020-05-01", "%Y-%m-%d"),as.Date("2020-06-30", "%Y-%m-%d")),ylim = c(0,600)) 
+    }
+    else if(menu =='5'){
+      ggplot(ohare_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "Obama arrives at OHare to cast his vote and first match for the Cubs world series and Kanye West performs at United center ", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2016-10-01", "%Y-%m-%d"),as.Date("2016-10-30", "%Y-%m-%d")),ylim = c(0,17500)) 
+    }
+    else if(menu =='6'){
+      ggplot(uic_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "UIC Winter Break", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2018-12-01", "%Y-%m-%d"),as.Date("2019-01-31", "%Y-%m-%d")),ylim = c(0,9000)) 
+    }
+    else if(menu =='7'){
+      ggplot(ohare_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "Crash of Blue Line at OHare on March 24", x = "Date", y ="Rides")  + coord_cartesian(xlim = c(as.Date("2014-03-15", "%Y-%m-%d"),as.Date("2014-04-10", "%Y-%m-%d")), ylim = c(0,12500))  
+    }
+    else if(menu =='8'){
+      ggplot(ohare_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "Ohare shutdown", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2019-09-23", "%Y-%m-%d"),as.Date("2019-10-20", "%Y-%m-%d")), ylim = c(0,19000)) 
+    }
+    else if(menu =='9'){
+      ggplot(uic_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "Chicago Cubs victory parade and rally in 4th Nov.", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2016-11-01", "%Y-%m-%d"),as.Date("2016-11-16", "%Y-%m-%d")),ylim = c(0,10000)) 
+    }
+    else{
+      ggplot(ohare_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "THankgiving", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2013-07-01", "%Y-%m-%d"),as.Date("2013-07-30", "%Y-%m-%d")),ylim = c(0,18000)) 
     }
     
   })
