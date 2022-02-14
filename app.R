@@ -127,7 +127,8 @@ ui <- dashboardPage(
               fluidPage(
                 box( width ='12', 
                      status = "primary",
-                     h1(textOutput("interesting_text")),
+                     h1(textOutput("interesting_text1")),
+                     h2(textOutput("interesting_text2")),
                      plotOutput("interesting_plot1"),
                      #plotOutput("interesting_plot2")
             
@@ -198,44 +199,105 @@ server <- function(input, output) {
   output$interesting_plot1 <- renderPlot({
     menu <- menuReactive()
     if(menu == '1'){
-      ggplot(uic_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "Sharp decline in number of riders at UIC-Halstead stop after WHO declares Covid-19 a pandemic in March 2020", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2020-01-01", "%Y-%m-%d"),as.Date("2021-01-01", "%Y-%m-%d")),ylim = c(0,8000))  +  scale_y_continuous(label=comma)
+      ggplot(uic_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "UIC-Halstead Ridership", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2020-01-01", "%Y-%m-%d"),as.Date("2021-01-01", "%Y-%m-%d")),ylim = c(0,8000))  +  scale_y_continuous(label=comma)
     }
     else if(menu == '2'){
-      ggplot(ohare_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "Two Sharp spikes in ridership at OHare during the Cubs vs Cardinals Baseball game on Sep 4th and Sep 6th 2020", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2020-07-01", "%Y-%m-%d"),as.Date("2020-09-30", "%Y-%m-%d")),ylim = c(0,3700))  +  scale_y_continuous(label=comma)
+      ggplot(ohare_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "OHare Ridership", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2020-07-01", "%Y-%m-%d"),as.Date("2020-09-30", "%Y-%m-%d")),ylim = c(0,3700))  +  scale_y_continuous(label=comma)
     }
     else if(menu == '3'){
-      ggplot(ohare_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "9/11", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2001-09-01", "%Y-%m-%d"),as.Date("2001-10-31", "%Y-%m-%d")),ylim = c(0,12000))  +  scale_y_continuous(label=comma)
+      ggplot(ohare_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "OHare Ridership", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2001-09-01", "%Y-%m-%d"),as.Date("2001-10-31", "%Y-%m-%d")),ylim = c(0,12000))  +  scale_y_continuous(label=comma)
     }
     else if(menu =='4'){
-      ggplot(uic_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "Train Service Halted Downtown Amid Protests In Wake Of George Floyd Death", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2020-05-01", "%Y-%m-%d"),as.Date("2020-06-30", "%Y-%m-%d")),ylim = c(0,600))  +  scale_y_continuous(label=comma)
+      ggplot(uic_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "OHare Ridership", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2020-05-01", "%Y-%m-%d"),as.Date("2020-06-30", "%Y-%m-%d")),ylim = c(0,600))  +  scale_y_continuous(label=comma)
     }
     else if(menu =='5'){
-      ggplot(ohare_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "Obama arrives at OHare to cast his vote and first match for the Cubs world series and Kanye West performs at United center ", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2016-10-01", "%Y-%m-%d"),as.Date("2016-10-30", "%Y-%m-%d")),ylim = c(0,17500)) +  scale_y_continuous(label=comma) 
+      ggplot(ohare_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "OHare Ridership", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2016-10-01", "%Y-%m-%d"),as.Date("2016-10-30", "%Y-%m-%d")),ylim = c(0,17500)) +  scale_y_continuous(label=comma) 
     }
     else if(menu =='6'){
-      ggplot(uic_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "UIC Winter Break", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2018-12-01", "%Y-%m-%d"),as.Date("2019-01-31", "%Y-%m-%d")),ylim = c(0,9000))  +  scale_y_continuous(label=comma)
+      ggplot(uic_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "UIC-Halstead Ridership", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2018-12-01", "%Y-%m-%d"),as.Date("2019-01-31", "%Y-%m-%d")),ylim = c(0,9000))  +  scale_y_continuous(label=comma)
     }
     else if(menu =='7'){
-      ggplot(ohare_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "Crash of Blue Line at OHare on March 24", x = "Date", y ="Rides")  + coord_cartesian(xlim = c(as.Date("2014-03-15", "%Y-%m-%d"),as.Date("2014-04-10", "%Y-%m-%d")), ylim = c(0,12500))  +  scale_y_continuous(label=comma) 
+      ggplot(ohare_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "OHare Ridership", x = "Date", y ="Rides")  + coord_cartesian(xlim = c(as.Date("2014-03-15", "%Y-%m-%d"),as.Date("2014-04-10", "%Y-%m-%d")), ylim = c(0,12500))  +  scale_y_continuous(label=comma) 
     }
     else if(menu =='8'){
-      ggplot(ohare_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "Ohare shutdown", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2019-09-23", "%Y-%m-%d"),as.Date("2019-10-20", "%Y-%m-%d")), ylim = c(0,19000))  +  scale_y_continuous(label=comma)
+      ggplot(ohare_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "OHare Ridership", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2019-09-23", "%Y-%m-%d"),as.Date("2019-10-20", "%Y-%m-%d")), ylim = c(0,19000))  +  scale_y_continuous(label=comma)
     }
     else if(menu =='9'){
-      ggplot(uic_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "Chicago Cubs victory parade and rally in 4th Nov.", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2016-11-01", "%Y-%m-%d"),as.Date("2016-11-16", "%Y-%m-%d")),ylim = c(0,10000))  +  scale_y_continuous(label=comma)
+      ggplot(uic_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "UIC Ridership", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2016-11-01", "%Y-%m-%d"),as.Date("2016-11-16", "%Y-%m-%d")),ylim = c(0,10000))  +  scale_y_continuous(label=comma)
     }
     else{
-      ggplot(ohare_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "THankgiving", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2013-07-01", "%Y-%m-%d"),as.Date("2013-07-30", "%Y-%m-%d")),ylim = c(0,18000)) +  scale_y_continuous(label=comma) 
+      ggplot(ohare_data, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "OHare Ridership", x = "Date", y ="Rides") + coord_cartesian(xlim = c(as.Date("2013-07-01", "%Y-%m-%d"),as.Date("2013-07-30", "%Y-%m-%d")),ylim = c(0,18000)) +  scale_y_continuous(label=comma) 
     }
     
   })
-  
+  output$interesting_text1 <- renderText(
+    { menu <- menuReactive()
+      if(menu == '1'){
+        temp = 'UIC COVID 19'
+      }
+      else if(menu == '2'){
+        temp = 'Cubs Game'      }
+      else if(menu == '3'){
+        temp = '9/11 Attacks'      }
+      else if(menu =='4'){
+        temp = 'BLM Protests on Jun-01 and Jun-02'      }
+      else if(menu =='5'){
+        temp = 'Obama Casts his Vote'      }
+      else if(menu =='6'){
+        temp = 'UIC Winterbreak'      }
+      else if(menu =='7'){
+        temp = 'Train Derails'      }
+      else if(menu =='8'){
+        temp = 'OHare CTA Station Renovation'      }
+      else if(menu =='9'){
+        temp = 'Chicago Cubs victory'      }
+      else{
+        temp = 'Chicago Cubs Game 2013'      }
+      return(temp)
+    }
+  )
+  output$interesting_text2 <- renderText(
+    {
+      menu <- menuReactive()
+      if(menu == '1'){
+        temp = 'Sharp decline in number of riders at UIC-Halstead stop after WHO declares Covid-19 a pandemic in March 2020'
+      }
+      else if(menu == '2'){
+        temp = 'Two Sharp spikes in ridership at OHare due to the Cubs vs Cardinals Baseball game on Sep 4th and Sep 6th 2020'
+        }
+      else if(menu == '3'){
+        temp = 'We can see a sudden drop in rider count at the OHare CTA right after the 9/11 World Trade Center Attacks in 2001'
+      }
+      else if(menu =='4'){
+        temp = 'Missing data for Junecan be attributed to sudden halting of services due to protests in the wake of George Floyd death'
+      }
+      else if(menu =='5'){
+        temp = 'The sudden spike on 7-Oct-2008 in ridership can be attributed to a number of reasons - Obama arrives at OHare to cast his vote, first match for the Cubs world series begins, and Kanye West was performing at United center '
+      }
+      else if(menu =='6'){
+        temp = 'Sharp decline in number of riders at UIC-Halstead stop from Dec 15 2018 to Jan 15 2018 due to Winter Break'
+      }
+      else if(menu =='7'){
+        temp = 'Crash of Blue Line at OHare on March 24'
+      }
+      else if(menu =='8'){
+        temp = 'No data for brief period as Ohare CTA shuts down for renovation'
+      }
+      else if(menu =='9'){
+        temp = 'Huge spike due to Chicago Cubs victory parade and rally on 4th Nov. 2016'
+      }
+      else{
+        temp = 'Spike in July due to Cubs game at Wrigley Field'
+      }
+      return(temp)
+    }
+  )
   output$plot1 <- renderPlot({
-    ggplot(data=station1Reactive(), aes(x=year(date), y=rides)) + geom_bar(fill="deepskyblue4", stat="identity")+  scale_y_continuous(label=comma)
+    ggplot(data=station1Reactive(), aes(x=year(date), y=rides)) + geom_bar(fill="deepskyblue4", stat="identity")+  scale_y_continuous(label=comma)+ labs(title = "Yearly Entries", x = "Year", y ="Rides")
   })
   
   output$plot1_right <- renderPlot({
-    ggplot(data=station2Reactive(), aes(x=year(date), y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "THankgiving", x = "Date", y ="Rides")+ scale_y_continuous(label=comma)
+    ggplot(data=station2Reactive(), aes(x=year(date), y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") + labs(title = "Ridership over the years", x = "Year", y ="Rides")+ scale_y_continuous(label=comma)
   })
   
   output$plot2 <- renderPlot({
@@ -244,17 +306,17 @@ server <- function(input, output) {
     
     if(timeframe == 'date')
     {
-      ggplot(data=df, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") +  scale_y_continuous(label=comma)
+      ggplot(data=df, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") +  scale_y_continuous(label=comma)+ labs(title = "Daily Entries ", x = "Date", y ="Rides")
     }
     
     else if(timeframe == 'month')
     {
-      ggplot(data=df, aes(x=month(date, label = TRUE), y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") +  scale_y_continuous(label=comma)
+      ggplot(data=df, aes(x=month(date, label = TRUE), y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") +  scale_y_continuous(label=comma)+ labs(title = "Monthly Entries ", x = "Month", y ="Rides")
     }
     else
     {
       #Day of the week
-      ggplot(data=df, aes(x=wday(date, label = TRUE), y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") +  scale_y_continuous(label=comma)
+      ggplot(data=df, aes(x=wday(date, label = TRUE), y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") +  scale_y_continuous(label=comma)+ labs(title = "Entries per Day of the Week", x = "Day of the Week", y ="Rides")
 
     }
   })
@@ -264,21 +326,21 @@ server <- function(input, output) {
     
     if(timeframe == 'date')
     {
-      ggplot(data=df, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") +  scale_y_continuous(label=comma)
+      ggplot(data=df, aes(x=date, y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") +  scale_y_continuous(label=comma)+ labs(title = "Daily Entries ", x = "Date", y ="Rides")
     }
     
     else if(timeframe == 'month')
     {
-      ggplot(data=df, aes(x=month(date, label = TRUE), y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") +  scale_y_continuous(label=comma)
+      ggplot(data=df, aes(x=month(date, label = TRUE), y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") +  scale_y_continuous(label=comma)+ labs(title = "Monthly Entries ", x = "Month", y ="Rides")
     }
     else
     {
       #Day of the week
-      ggplot(data=df, aes(x=wday(date, label = TRUE), y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") +  scale_y_continuous(label=comma)
+      ggplot(data=df, aes(x=wday(date, label = TRUE), y=rides)) + geom_bar(fill="deepskyblue4", stat="identity") +  scale_y_continuous(label=comma)+ labs(title = "Entries per Day of the Week", x = "Day of the Week", y ="Rides")
       
     }
   })
-  output$tab1 <- renderDataTable(rownames=FALSE,
+  output$tab1 <- renderDataTable(rownames=FALSE, options=list(pageLength=5),
     {
       timeframe <- input$timeframe1
       df <- year1Reactive()
@@ -299,7 +361,7 @@ server <- function(input, output) {
       
     }
     )
-  output$tab1_right <- renderDataTable(rownames=FALSE,
+  output$tab1_right <- renderDataTable(rownames=FALSE,options=list(pageLength=5),
     {
       timeframe <- input$timeframe2
       df <- year2Reactive()
